@@ -1,19 +1,17 @@
-// Smooth scroll animation for navbar links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
+// Slide menu dari kanan
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+
+menuBtn.addEventListener('click', () => {
+  sideMenu.classList.toggle('open');
+});
+
+// Tutup menu otomatis saat klik link
+document.querySelectorAll('.side-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    sideMenu.classList.remove('open');
   });
 });
 
-// Simple fade-in effect for cards
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".menu-item").forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 50) {
-      card.classList.add("show");
-    }
-  });
-});
+// Animasi fade in saat load
+document.body.classList.add('fade-in');
