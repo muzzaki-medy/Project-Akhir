@@ -746,3 +746,21 @@ iframe {
 .about-section p span::after {
   content: " ";
 }
+.about-section h2,
+.about-section p {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.hero-content h2,
+.about-section h2,
+.about-section p {
+  white-space: pre-wrap;
+  overflow: hidden;
+  border-right: .10em solid transparent;
+}

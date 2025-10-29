@@ -320,5 +320,111 @@ setTimeout(() => orderForm.classList.remove("highlight"), 2000);
       });
     });
   }
+    // ===============================
+  // ====== TYPING EFFECT ==========
+  // ===============================
+  function typeEffect(element, text, speed = 70, delay = 500) {
+    if (!element) return;
+    element.textContent = '';
+    let i = 0;
+    setTimeout(function typing() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      }
+    }, delay);
+  }
+
+  // ----- Untuk halaman Home -----
+  const heroHeading = document.querySelector('.hero-content h2');
+  if (heroHeading) {
+    const fullText = heroHeading.textContent.trim();
+    typeEffect(heroHeading, fullText, 70, 500);
+  }
+
+  // ----- Untuk halaman About -----
+  const aboutHeading = document.querySelector('.about-section h2');
+  const aboutParagraph = document.querySelector('.about-section p'); // paragraf pertama
+  if (aboutHeading) {
+    const aboutText = aboutHeading.textContent.trim();
+    typeEffect(aboutHeading, aboutText, 75, 600);
+
+    // Jalankan efek paragraf setelah judul selesai diketik
+    if (aboutParagraph) {
+      const aboutParaText = aboutParagraph.textContent.trim();
+      setTimeout(() => {
+        typeEffect(aboutParagraph, aboutParaText, 25, 300);
+      }, aboutText.length * 75 + 800); // jeda berdasarkan panjang judul
+    }
+  }
+
 
 }); // end DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ===============================
+  // ======= TYPING EFFECT =========
+  // ===============================
+
+  function typeEffect(element, text, speed = 70, delay = 500) {
+    if (!element) return;
+    element.textContent = '';
+    let i = 0;
+    setTimeout(function typing() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      }
+    }, delay);
+  }
+
+  // ----- Untuk halaman Home -----
+  const heroHeading = document.querySelector('.hero-content h2');
+  if (heroHeading) {
+    const fullText = heroHeading.textContent.trim();
+    typeEffect(heroHeading, fullText, 70, 400);
+  }
+
+  // ----- Untuk halaman About -----
+  const aboutHeading = document.querySelector('.about-section h2');
+  const aboutParagraph = document.querySelector('.about-section p');
+
+  if (aboutHeading) {
+    const headingText = aboutHeading.textContent.trim();
+    typeEffect(aboutHeading, headingText, 80, 500);
+
+    if (aboutParagraph) {
+      const paragraphText = aboutParagraph.textContent.trim();
+      // Jalankan efek paragraf setelah heading selesai diketik
+      setTimeout(() => {
+        typeEffect(aboutParagraph, paragraphText, 25, 200);
+      }, headingText.length * 80 + 800);
+    }
+  }
+
+  // ===============================
+  // ===== ANIMASI TAMBAHAN ========
+  // ===============================
+
+  // Fade-in lembut setelah teks selesai diketik
+  const fadeTargets = document.querySelectorAll('.hero-content h2, .about-section h2, .about-section p');
+  fadeTargets.forEach(el => {
+    el.style.opacity = 0;
+    el.style.transition = 'opacity 1s ease';
+    setTimeout(() => el.style.opacity = 1, 300);
+  });
+
+  // (Tambahan opsional) animasi scroll halus
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+});
