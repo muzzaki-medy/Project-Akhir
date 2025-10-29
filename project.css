@@ -172,6 +172,71 @@ h1, h2, h3 {
   font-weight: 500;
   color: #4a3b63;
 }
+#orderForm.highlight {
+  box-shadow: 0 0 20px rgba(186, 152, 214, 0.5);
+  transition: box-shadow 0.6s ease;
+}
+
+header {
+  color: #4a3b63;
+  background: white;
+  text-align: center;
+  padding: 20px;
+}
+
+main {
+  max-width: 500px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+button {
+  background-color: #6b5b75;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color:#4a3b63;
+}
+
+section {
+  margin-top: 60px;
+}
+section:first-of-type {
+  margin-top: 0;
+}
+
+.location-section {
+  margin-top: 0; 
+  padding-top: 10px; 
+}
 
 .about-section {
   padding: 120px 5% 180px; 
@@ -180,9 +245,13 @@ h1, h2, h3 {
   min-height: 100vh;
 }
 
+.about-section p {
+  margin-bottom: 5px; /* hapus jarak ekstra di bawah paragraf */
+}
+
 .about-section h2 {
   font-size: 2.2rem;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
   margin-top: 80px;
   color: #4a3b63;
 }
@@ -567,7 +636,7 @@ iframe {
     }
 
     .modal-content button:hover {
-      background-color: #9d68e2;
+      background-color: #b896d6;
     }
 
     .order-form {
@@ -602,8 +671,20 @@ iframe {
     }
 
     /* === modal helpers (added) === */
-.product-modal {
-  display: none;
+  
+  .product-modal .modal-image {
+  width: 80%;
+  max-width: 280px;
+  height: auto;
+  display: block;
+  margin: 0 auto 15px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+  .product-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
@@ -629,14 +710,6 @@ iframe {
   position: relative;
 }
 
-.modal-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 12px;
-  margin: 12px auto;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  display: block;
-}
 
 .close-btn {
   position: absolute;
@@ -673,4 +746,3 @@ iframe {
 .about-section p span::after {
   content: " ";
 }
-

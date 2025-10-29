@@ -40,6 +40,53 @@
     </div>
   </section>
 
+   <title>Form Pemesanan Dessert</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>🍰 Form Pemesanan Dessert</h1>
+    <p>Silakan isi data di bawah untuk memesan produk kami.</p>
+  </header>
+
+  <main>
+    <form id="orderForm">
+      <label for="name">Nama Lengkap:</label>
+      <input type="text" id="name" placeholder="Masukkan nama kamu" required />
+
+      <label for="phone">Nomor WhatsApp:</label>
+      <input type="tel" id="phone" placeholder="Contoh: 0877xxxx" required />
+
+      <label for="product">Pilih Produk:</label>
+      <select id="product" required>
+        <option value="">-- Pilih Produk --</option>
+        <option value="Salad Buah">Salad Buah</option>
+        <option value="Es Kopyor">Es Kopyor</option>
+        <option value="Puding Buah">Puding Buah</option>
+        <option value="Puding Brownies">Puding Brownies</option>
+        <option value="Puding Caramel">Puding Caramel</option>
+        <option value="Singkong Thailand">Singkong Thailand</option>
+        <option value="Roti Pisang Coklat">Roti Pisang Coklat</option>
+        <option value="Bolu Pisang">Bolu Pisang</option>
+        <option value="Roti Lembut Savory">Roti Lembut Savory</option>
+        <option value="Makaroni Sekutel">Makaroni Sekutel</option>  
+      </select>
+
+      <label for="quantity">Jumlah Pesanan:</label>
+      <input type="number" id="quantity" min="1" placeholder="Masukkan jumlah" required />
+
+      <label for="pickup">Tanggal Pengambilan:</label>
+      <input type="date" id="pickup" required />
+
+      <label for="notes">Catatan Tambahan:</label>
+      <textarea id="notes" rows="3" placeholder="Contoh: Tanpa kacang, tambahkan lilin kecil"></textarea>
+
+      <button type="submit">Kirim Pesanan</button>
+    </form>
+  </main>
+
+
   <footer class="footer">
     <div class="footer-content">
       <p>© Muzzaki, Faridza, Orentscia, Aurel, Thalita.</p>
@@ -48,6 +95,7 @@
 
   <!-- Modal container (empty) — required for JS to inject modal content -->
   <div id="product-modal" class="product-modal"></div>
-
+  
+  <script src="script.js"></script>
 </body>
 </html>

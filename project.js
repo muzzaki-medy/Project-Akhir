@@ -114,6 +114,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+// ===============================
+// ========== ORDER FORM =========
+// ===============================
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // Ambil nilai input
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const product = document.getElementById("product").value;
+  const quantity = document.getElementById("quantity").value;
+  const pickup = document.getElementById("pickup").value; 
+  const notes = document.getElementById("notes").value.trim();
+
+  // Validasi sederhana
+  if (!name || !phone || !product || !quantity || !pickup) {
+    alert("Harap isi semua data yang wajib diisi!");
+    return;
+  }
+
+  // Format pesan WhatsApp
+  const message = `
+Halo Ralitha Dessert 👋
+Saya ingin memesan produk berikut:
+
+- Nama: ${name}
+- No. WhatsApp: ${phone}
+- Produk: ${product}
+- Jumlah: ${quantity}
+- Tanggal Ambil: ${pickup}
+- Catatan: ${notes || "-"}
+
+Terima kasih!
+  `.trim();
+
+  // Encode pesan ke URL
+  const encodedMessage = encodeURIComponent(message);
+  const waNumber = "6287775128658"; // Nomor toko kamu
+
+  // Arahkan ke WhatsApp
+  const waLink = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+  window.open(waLink, "_blank");
+});
+
+orderForm.classList.add("highlight");
+setTimeout(() => orderForm.classList.remove("highlight"), 2000);
+
+
   // ===============================
   // ======= TOAST (welcome) ======
   // ===============================
@@ -250,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ${p.image ? `<img src="${p.image}" alt="${p.name}" class="modal-image">` : ''}
             <h3>${p.name}</h3>
             <p>${p.desc}</p>
-            <button id="order-btn">Pemesanan Online</button>
+            <button id="order-btn">Pesan Sekarang</button>
           </div>
         `;
         modal.classList.add("open");
@@ -260,80 +308,16 @@ document.addEventListener("DOMContentLoaded", () => {
           modal.classList.remove("open");
         });
 
-        // show order form inside modal
+        // scroll langsung ke form pemesanan di bawah
         modal.querySelector("#order-btn").addEventListener("click", () => {
-          showOrderForm(p.name);
-        });
+          modal.classList.remove("open");
+          const orderForm = document.getElementById("orderForm");
+          if (orderForm) {
+            orderForm.scrollIntoView({ behavior: "smooth" });
+       }
       });
-    });
-  }
 
-  // ===============================
-  // ===== ORDER FORM (in modal) ===
-  // ===============================
-  function showOrderForm(productName) {
-    if (!modal) return;
-    modal.innerHTML = `
-      <div class="modal-content">
-        <span class="close-btn" aria-label="close">&times;</span>
-        <h3>Form Pemesanan</h3>
-        <p><strong>Produk:</strong> ${productName}</p>
-        <form id="order-form">
-          <label>Nama Lengkap:</label>
-          <input type="text" id="name" required>
-
-          <label>Alamat:</label>
-          <input type="text" id="address" required>
-
-          <label>Email:</label>
-          <input type="email" id="email" required>
-
-          <label>Nomor Telepon:</label>
-          <input type="tel" id="phone" required pattern="[0-9]+" inputmode="numeric" title="Hanya boleh angka">
-
-          <button type="submit">Kirim Pesanan</button>
-        </form>
-      </div>
-    `;
-    modal.classList.add("open");
-
-    // close
-    modal.querySelector(".close-btn").addEventListener("click", () => modal.classList.remove("open"));
-
-    const form = modal.querySelector("#order-form");
-
-    // prefill from localStorage
-    const savedData = JSON.parse(localStorage.getItem("orderData"));
-    if (savedData) {
-      form.name.value = savedData.name || "";
-      form.address.value = savedData.address || "";
-      form.email.value = savedData.email || "";
-      form.phone.value = savedData.phone || "";
-    }
-
-    // handle submit with validation (HTML required + pattern handles numeric)
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      // basic client-side validation
-      if (!form.checkValidity()) {
-        // will trigger default validation bubble
-        form.reportValidity();
-        return;
-      }
-
-      const orderData = {
-        name: form.name.value.trim(),
-        address: form.address.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        product: productName,
-        date: new Date().toISOString()
-      };
-
-      localStorage.setItem("orderData", JSON.stringify(orderData));
-      showToast(`Terima kasih, pesanan Anda untuk ${productName} telah dikirim!`);
-      modal.classList.remove("open");
+      });
     });
   }
 
